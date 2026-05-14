@@ -1,0 +1,1 @@
+Este projeto foi desenvolvido por mim, tendo como ideal a criação de imagens de mapa de altitudes usando c++. O projeto foi proposto inicialmente na disciplina de ITP, no primeiro semestre de BCC. Porém, tudo aqui foi feito a partir de minha lógica.

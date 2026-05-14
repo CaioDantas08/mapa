@@ -1,4 +1,6 @@
-#include <iostream>
+#ifndef COR_H
+#define COR_H
+
 using value_type = int;
 
 struct Cor{
@@ -6,3 +8,5 @@ struct Cor{
     value_type G{0};
     value_type B{0}; 
 };
+
+#endif

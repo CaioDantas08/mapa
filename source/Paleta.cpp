@@ -1,31 +1,17 @@
-#include <iostream>
-#include "Cor.cpp"
-#include <vector>
-#include <fstream>
-#include <string>
-#include <sstream>
-using value_type = int;
+#include "Paleta.h"
 
-class Paleta{
-
-    private:
-    value_type quantidade{0};
-    std::vector<Cor> cores;
-    std::vector<double> valores;
-
-    public:
-    Paleta(){
+    Paleta::Paleta(){
     }
-    Paleta(value_type quantidade, std::vector<Cor> c, std::vector<double> v){
+    Paleta::Paleta(value_type quantidade, std::vector<Cor> c, std::vector<double> v){
         this->quantidade = quantidade;
         this->cores = c;
         this->valores = v;
 
-        this->cores.resize(100);
-        this->valores.resize(100);
+        //this->cores.resize(100);
+        //this->valores.resize(100);
     }
 
-    void parse_line(std::string linha){
+    void Paleta::parse_line(std::string linha){
         std::stringstream ss(linha);
 
         double valor{0};
@@ -40,7 +26,7 @@ class Paleta{
         c.B = B;
         cores.push_back(c);
     }
-    void ler_arquivo(const std::string &nome){
+    void Paleta::ler_arquivo(const std::string &nome){
         std::ifstream arquivo(nome);
         if(arquivo.is_open()){
             std::string linha;
@@ -59,7 +45,7 @@ class Paleta{
         }
     }
 
-    Cor consultar_cor(double valor){
+    Cor Paleta::consultar_cor(double valor){
         //Implementar upper bound ou lower bound depois
         value_type indice{0};
         for (value_type i = 0; i < valores.size(); i++){
@@ -71,23 +57,21 @@ class Paleta{
         return cores[indice];
     }
 
-    value_type get_quantidade(){
+    value_type Paleta::get_quantidade(){
         return quantidade;
     }   
-    std::vector<Cor> get_cores(){
+    std::vector<Cor> Paleta::get_cores(){
         return cores;
     }
-    std::vector<double> get_valores(){
+    std::vector<double> Paleta::get_valores(){
         return valores;
     }
-    void set_quantidade(value_type quantidade){
+    void Paleta::set_quantidade(value_type quantidade){
         this->quantidade = quantidade;
     }
-    void set_cores(std::vector<Cor> cores){
+    void Paleta::set_cores(std::vector<Cor> cores){
         this->cores = cores;
     }
-    void set_valores(std::vector<double> valores){
+    void Paleta::set_valores(std::vector<double> valores){
         this->valores = valores;
     }
-
-};
