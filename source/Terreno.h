@@ -7,6 +7,7 @@
 #include <cmath>
 #include <cstdlib> 
 #include <ctime>
+#include <fstream>
 using value_type = int;
 
 class Terreno{
