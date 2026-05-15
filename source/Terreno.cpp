@@ -166,3 +166,31 @@
         }
         arquivo.close();
     };
+
+
+    Imagem Terreno::criar_mapa_altitude(Paleta &p, double rugosidade){
+        Imagem img(this->altura, this->largura);
+        value_type n = static_cast<value_type>(std::log2(this->altura - 1));
+        gerar_mapa(n, rugosidade);
+
+        for(value_type i = 0; i < this->altura; i++){
+        for(value_type j = 0; j < this->largura; j++){
+
+            value_type alt = get_altitude(i, j);
+            Cor cor_pixel = p.consultar_cor(alt);
+
+            // Aplica sombreamento baseado no ponto superior-esquerdo
+            if(i > 0 && j > 0){
+                value_type alt_superior_esquerdo = get_altitude(i-1, j-1);
+                if(alt < alt_superior_esquerdo){
+                    double fator = 0.5; // fator de escurecimento
+                    cor_pixel.R = static_cast<int>(cor_pixel.R * fator);
+                    cor_pixel.G = static_cast<int>(cor_pixel.G * fator);
+                    cor_pixel.B = static_cast<int>(cor_pixel.B * fator);
+                }
+            }
+            img.set_cor(i, j, cor_pixel);
+            }
+        }
+        return img;
+    };

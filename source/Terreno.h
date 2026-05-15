@@ -8,6 +8,8 @@
 #include <cstdlib> 
 #include <ctime>
 #include <fstream>
+#include "Paleta.h"
+#include "Imagem.h"
 using value_type = int;
 
 class Terreno{
@@ -35,6 +37,8 @@ class Terreno{
 
     value_type get_linhas();
     value_type get_colunas();
+
+    Imagem criar_mapa_altitude(Paleta &p, double rugosidade);
 
 };
 

@@ -20,7 +20,7 @@
         this->pixels[this->largura*i + j] = cor;
     };
     void Imagem::salvar_imagem(const std::string &nome_arquivo){
-        std::ofstream arquivo(nome_arquivo);
+        std::ofstream arquivo(nome_arquivo + ".ppm");
 
         arquivo << "P3\n";
         arquivo << this->altura << " " << this->largura << "\n";
