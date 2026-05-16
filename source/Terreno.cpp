@@ -10,10 +10,10 @@
     }
     Terreno::~Terreno(){}
 
-    value_type Terreno::get_altitude(value_type i, value_type j){
+    altitude_type Terreno::get_altitude(value_type i, value_type j){
         return this->altitudes[this->largura*i + j];
     };
-    void Terreno::set_altitude(value_type i, value_type j, value_type valor){
+    void Terreno::set_altitude(value_type i, value_type j, altitude_type valor){
         altitudes[i * this->largura + j] = valor;
     };
     value_type Terreno::get_linhas(){
@@ -49,7 +49,7 @@
         set_altitude(
             x + halfStep,
             y + halfStep,
-            static_cast<value_type>(media + deslocamento)
+            media + deslocamento
         );
     };
     void Terreno::square(value_type &x, value_type &y, value_type halfStep, double &rugosidade){
@@ -89,7 +89,7 @@
         set_altitude(
             x,
             y,
-            static_cast<value_type>(media + deslocamento)
+            media + deslocamento
         );
     };
     void Terreno::gerar_mapa(value_type n, double rugosidade){
@@ -124,7 +124,7 @@
             }
 
             // Reduzindo a rugosidade
-            deslocamento /= 2.0;
+            deslocamento *= 0.7;
             step /= 2;
         }
 
@@ -168,29 +168,56 @@
     };
 
 
-    Imagem Terreno::criar_mapa_altitude(Paleta &p, double rugosidade){
+    Imagem Terreno::criar_mapa_altitude(Paleta &p, double rugosidade) {
         Imagem img(this->altura, this->largura);
         value_type n = static_cast<value_type>(std::log2(this->altura - 1));
         gerar_mapa(n, rugosidade);
 
-        for(value_type i = 0; i < this->altura; i++){
-        for(value_type j = 0; j < this->largura; j++){
+        double min_alt = get_altitude(0, 0);
+        double max_alt = get_altitude(0, 0);
 
-            value_type alt = get_altitude(i, j);
-            Cor cor_pixel = p.consultar_cor(alt);
+        for (int i = 0; i < this->altura; i++) {
+            for (int j = 0; j < this->largura; j++) {
+                double alt = get_altitude(i, j);
+                min_alt = std::min(min_alt, alt);
+                max_alt = std::max(max_alt, alt);
+            }
+        }
 
-            // Aplica sombreamento baseado no ponto superior-esquerdo
-            if(i > 0 && j > 0){
-                value_type alt_superior_esquerdo = get_altitude(i-1, j-1);
-                if(alt < alt_superior_esquerdo){
-                    double fator = 0.5; // fator de escurecimento
+        double limite_sombra = 0.267;
+
+        for (value_type i = 0; i < this->altura; i++) {
+            for (value_type j = 0; j < this->largura; j++) {
+                altitude_type alt = get_altitude(i, j);
+                double normalizado = (alt - min_alt) / (max_alt - min_alt);
+                normalizado*=0.83;
+                Cor cor_pixel = p.consultar_cor(normalizado);
+
+
+                bool sombra = false;
+                double maior_alt_diagonal = alt;
+                int k = 1;
+                while (i >= k && j >= k) {
+                    double alt_vizinho = get_altitude(i - k, j - k);
+                    if (alt_vizinho > maior_alt_diagonal) {
+                        maior_alt_diagonal = alt_vizinho;
+                    }
+                    k++;
+                }
+                if (maior_alt_diagonal > alt + (max_alt - min_alt) * limite_sombra) {
+                    sombra = true;
+                }
+
+                if (sombra) {
+                    double diff = maior_alt_diagonal - alt;
+                    double fator = 1.0 - std::min(0.18, diff * 0.01);
                     cor_pixel.R = static_cast<int>(cor_pixel.R * fator);
                     cor_pixel.G = static_cast<int>(cor_pixel.G * fator);
                     cor_pixel.B = static_cast<int>(cor_pixel.B * fator);
                 }
-            }
-            img.set_cor(i, j, cor_pixel);
+
+                img.set_cor(i, j, cor_pixel);
             }
         }
         return img;
-    };
+    }

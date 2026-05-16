@@ -20,6 +20,6 @@ void RunningOptions(){
     std::getline(std::cin, nome_arquivo);
 
     Imagem img;
-    img = T.criar_mapa_altitude(P, 10.0);
+    img = T.criar_mapa_altitude(P, 10000.0);
     img.salvar_imagem(nome_arquivo);
 };
