@@ -1,0 +1,28 @@
+28
+0.000000   0  30  70   // águas profundas
+0.037037   0  60 110   // águas médias
+0.074074  30 100 150   // águas rasas
+0.111111  70 140 180   // águas costeiras
+0.148148 120 180 200   // areia úmida
+0.185185 160 190 150   // vegetação rasteira
+0.222222 130 170  90   // gramado
+0.259259 110 160  70   // pasto
+0.296296  90 150  60   // floresta clara
+0.333333  70 130  50   // floresta densa
+0.370370  90 100  60   // floresta escura
+0.407407 120  90  70   // terra batida
+0.444444 150  80  60   // terra árida
+0.481481 170  90  70   // cerrado
+0.518519 190 110  80   // savana
+0.555556 210 130  80   // chaparral
+0.592593 200 120  90   // colinas secas
+0.629630 190 110 100   // montanha rochosa
+0.666667 170 100  90   // rocha exposta
+0.703704 150  90  80   // rocha escura
+0.740741 130  80  70   // solo pedregoso
+0.777778 160 120  90   // encosta
+0.814815 190 150 110   // montanha árida
+0.851852 210 180 140   // montanha alta
+0.925926 230 220 200   // neve suja
+0.962963 245 245 235   // neve fresca
+1.000000 255 255 250   // topo gelado

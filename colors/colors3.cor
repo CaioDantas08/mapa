@@ -1,0 +1,31 @@
+30
+0.000000   10  20  50   // fossa oceânica
+0.035000   20  50  90   // oceano profundo
+0.070000   40  90 140   // oceano médio
+0.105000   70 130 180   // oceano raso
+0.140000  110 170 210   // águas costeiras
+0.175000  150 200 220   // lagoa
+0.210000  180 210 190   // mangue
+0.245000  160 200 150   // pântano
+0.280000  140 190 120   // campina úmida
+0.315000  130 180  90   // pasto verde
+0.350000  110 160  70   // floresta tropical
+0.385000   90 140  60   // floresta temperada
+0.420000   80 120  70   // floresta escura
+0.455000  100 110  80   // vegetação rala
+0.490000  130 120  90   // cerrado
+0.525000  170 140 100   // savana
+0.560000  210 160 100   // pradaria seca
+0.595000  230 180  90   // estepe dourada
+0.630000  210 170 100   // colinas áridas
+0.665000  190 150 110   // montanhas baixas
+0.700000  170 130 110   // encosta rochosa
+0.735000  150 110 100   // rocha exposta
+0.770000  130  90  90   // rocha escura
+0.805000  150 110  90   // solo pedregoso
+0.840000  180 140 120   // montanha seca
+0.875000  210 180 160   // montanha alta
+0.910000  230 215 200   // neve suja
+0.945000  245 240 230   // neve recente
+0.980000  252 250 245   // gelo compacto
+1.000000  255 255 250   // pico nevado
